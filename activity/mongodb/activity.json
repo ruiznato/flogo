@@ -2,9 +2,9 @@
 {
     "name": "mongodb",
     "type": "flogo:activity",
-    "ref": "github.com/ruiznato/flogo/tree/master/activity/mongodb",
+    "ref": "github.com/ruiznato/flogo/activity/mongodb",
     "version": "0.0.1",
-    "title": "MongoDB",
+    "title": "MongoDB - New",
     "description": "Manage MongoDB documents in a specified collection",
     "homepage": "https://github.com/ruiznato/flogo/tree/master/activity/mongodb",
     "input": [
