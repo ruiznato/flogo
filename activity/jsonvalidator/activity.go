@@ -1,10 +1,10 @@
 package jsonvalidator
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"strings"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
@@ -49,7 +49,15 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 
 	log.Infof("Doc validated: %v", result.Valid())
 	if !result.Valid() {
-		context.SetOutput("error", strings.Join(result.Errors(), "\n"))
+		var buffer bytes.Buffer
+
+		for i := 0; i < 1000; i++ {
+			buffer.WriteString("a")
+		}
+		for _, err := range result.Errors() {
+			buffer.WriteString(fmt.Sprintf("%s\n", err))
+		}
+		context.SetOutput("error", buffer.String())
 	}
 	context.SetOutput("valid", result.Valid())
 	return true, nil
