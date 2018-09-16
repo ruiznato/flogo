@@ -1,4 +1,4 @@
-package uuid
+package jsonvalidator
 
 import (
 	"io/ioutil"

@@ -1,4 +1,4 @@
-package uuid
+package jsonvalidator
 
 import (
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
