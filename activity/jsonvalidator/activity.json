@@ -1,0 +1,26 @@
+{
+    "name": "jsonvalidator",
+    "version": "0.0.1",
+    "type": "flogo:activity",
+    "title": "Validate JSON",
+    "ref": "github.com/ruiznato/flogo/activity/jsonvalidator",
+    "description": "Validate JSON against Schema",
+    "author": "Natalio Ruiz <natalio@neitosoft.com>",
+    "homepage": "https://github.com/ruiznato/flogo/tree/master/activity/uuid",
+    "inputs":[
+      {
+        "name": "document",
+        "type": "any"
+      },
+      {
+        "name": "schema",
+        "type": "any"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "valid",
+        "type": "boolean"
+      }
+    ]
+  }
