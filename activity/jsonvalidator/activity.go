@@ -24,13 +24,13 @@ func (a *JSONValidatorActivity) Metadata() *activity.Metadata {
 
 // Eval implements api.Activity.Eval - Invokes a REST Operation
 func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err error) {
-	jsonDoc, _ := context.GetInput("document").(string)
-	jsonSchema, _ := context.GetInput("schema").(string)
+	jsonDoc := context.GetInput("document")
+	jsonSchema := context.GetInput("schema")
 
 	log.Infof("DOC: %v", jsonDoc)
 	log.Infof("SCHEMA: %v", jsonSchema)
-	doc := gojsonschema.NewStringLoader(jsonDoc)
-	schema := gojsonschema.NewStringLoader(jsonSchema)
+	doc := gojsonschema.NewStringLoader(jsonDoc.(string))
+	schema := gojsonschema.NewStringLoader(jsonSchema.(string))
 
 	log.Info("Loaded doc and schema")
 	result, err := gojsonschema.Validate(schema, doc)
