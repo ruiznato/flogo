@@ -219,7 +219,7 @@ func newActionHandler(rt *RestTrigger, handler *trigger.Handler) httprouter.Hand
 		}
 
 		if replyHeaders != nil {
-			log.Debugf("Headers %v", replyHeaders)
+			w.Header().Set("HEADERS", replyHeaders.(string))
 		}
 
 		if replyData != nil {
