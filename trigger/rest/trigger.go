@@ -195,7 +195,7 @@ func newActionHandler(rt *RestTrigger, handler *trigger.Handler) httprouter.Hand
 
 		var replyData interface{}
 		var replyCode int
-		var replyHeaders interface{}
+		var replyHeaders map[string]interface{}
 
 		if len(results) != 0 {
 			dataAttr, ok := results["data"]
@@ -208,7 +208,7 @@ func newActionHandler(rt *RestTrigger, handler *trigger.Handler) httprouter.Hand
 			}
 			headersAttr, ok := results["headers"]
 			if ok {
-				replyHeaders = headersAttr.Value()
+				replyHeaders = headersAttr.Value().(map[string]interface{})
 			}
 		}
 
@@ -219,7 +219,9 @@ func newActionHandler(rt *RestTrigger, handler *trigger.Handler) httprouter.Hand
 		}
 
 		if replyHeaders != nil {
-			w.Header().Set("HEADERS", replyHeaders.(string))
+			for k, v := range replyHeaders {
+				w.Header().Set(k, v.(string))
+			}
 		}
 
 		if replyData != nil {
