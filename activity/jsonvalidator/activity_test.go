@@ -45,7 +45,8 @@ func TestJsonSchema(t *testing.T) {
 		"type": "object",
 		"properties": {
 			"data": {"type": "string"}
-		}
+		},
+		"required": ["data"]
 	}
 	`
 

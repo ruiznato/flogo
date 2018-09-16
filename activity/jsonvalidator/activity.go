@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"strings"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
@@ -47,6 +48,9 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 	}
 
 	log.Infof("Doc validated: %v", result.Valid())
+	if !result.Valid() {
+		context.SetOutput("error", strings.Join(result.Errors(), "\n"))
+	}
 	context.SetOutput("valid", result.Valid())
 	return true, nil
 }

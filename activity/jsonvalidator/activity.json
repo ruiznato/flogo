@@ -21,6 +21,10 @@
       {
         "name": "valid",
         "type": "boolean"
+      },
+      {
+        "name": "error",
+        "type": "string"
       }
     ]
   }
