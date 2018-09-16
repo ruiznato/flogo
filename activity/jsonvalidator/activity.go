@@ -27,17 +27,19 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 	jsonDoc, _ := context.GetInput("document").(string)
 	jsonSchema, _ := context.GetInput("schema").(string)
 
+	log.Infof("DOC: %v", jsonDoc)
+	log.Infof("SCHEMA: %v", jsonSchema)
 	doc := gojsonschema.NewStringLoader(jsonDoc)
 	schema := gojsonschema.NewStringLoader(jsonSchema)
 
-	log.Debug("Loaded doc and schema")
+	log.Info("Loaded doc and schema")
 	result, err := gojsonschema.Validate(schema, doc)
 	if err != nil {
-		log.Debugf("ERROR: %v", err)
+		log.Infof("ERROR: %v", err)
 		return false, err
 	}
 
-	log.Debugf("Doc validated: %v", result.Valid())
+	log.Infof("Doc validated: %v", result.Valid())
 	context.SetOutput("valid", result.Valid())
 	return true, nil
 }
