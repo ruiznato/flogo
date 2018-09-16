@@ -6,7 +6,7 @@
     "ref": "github.com/ruiznato/flogo/activity/jsonvalidator",
     "description": "Validate JSON against Schema",
     "author": "Natalio Ruiz <natalio@neitosoft.com>",
-    "homepage": "https://github.com/ruiznato/flogo/tree/master/activity/uuid",
+    "homepage": "https://github.com/ruiznato/flogo/tree/master/activity/jsonvalidator",
     "inputs":[
       {
         "name": "document",
