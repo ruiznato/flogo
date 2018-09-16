@@ -1,6 +1,8 @@
 package jsonvalidator
 
 import (
+	"reflect"
+
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 	"github.com/xeipuuv/gojsonschema"
@@ -27,8 +29,8 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 	jsonDoc := context.GetInput("document")
 	jsonSchema := context.GetInput("schema")
 
-	log.Infof("DOC: %v", jsonDoc)
-	log.Infof("SCHEMA: %v", jsonSchema)
+	log.Infof("DOC: %v", reflect.TypeOf(jsonDoc))
+	log.Infof("SCHEMA: %v", reflect.TypeOf(jsonSchema))
 	doc := gojsonschema.NewStringLoader(jsonDoc.(string))
 	schema := gojsonschema.NewStringLoader(jsonSchema.(string))
 
