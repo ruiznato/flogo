@@ -1,6 +1,8 @@
 package jsonvalidator
 
 import (
+	"encoding/json"
+	"fmt"
 	"reflect"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
@@ -26,13 +28,16 @@ func (a *JSONValidatorActivity) Metadata() *activity.Metadata {
 
 // Eval implements api.Activity.Eval - Invokes a REST Operation
 func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err error) {
-	jsonDoc := context.GetInput("document")
-	jsonSchema := context.GetInput("schema")
+	jsonDoc := context.GetInput("document").(map[string]interface{})
+	jsonSchema := context.GetInput("schema").(map[string]interface{})
+
+	docString, _ := json.Marshal(jsonDoc)
+	schemaString, _ := json.Marshal(jsonSchema)
 
 	log.Infof("DOC: %v", reflect.TypeOf(jsonDoc))
 	log.Infof("SCHEMA: %v", reflect.TypeOf(jsonSchema))
-	doc := gojsonschema.NewStringLoader(jsonDoc.(string))
-	schema := gojsonschema.NewStringLoader(jsonSchema.(string))
+	doc := gojsonschema.NewStringLoader(fmt.Sprintf("%s", docString))
+	schema := gojsonschema.NewStringLoader(fmt.Sprintf("%s", schemaString))
 
 	log.Info("Loaded doc and schema")
 	result, err := gojsonschema.Validate(schema, doc)
