@@ -46,7 +46,7 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 
 		var errors []string
 		for _, err := range result.Errors() {
-			append(errors, err)
+			errors = append(errors, fmt.Sprintf("%s", err))
 		}
 		context.SetOutput("error", errors)
 	}
