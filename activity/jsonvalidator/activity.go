@@ -1,7 +1,6 @@
 package jsonvalidator
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 
@@ -44,15 +43,12 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 	}
 
 	if !result.Valid() {
-		var buffer bytes.Buffer
 
-		for i := 0; i < 1000; i++ {
-			buffer.WriteString("a")
-		}
+		var errors []string
 		for _, err := range result.Errors() {
-			buffer.WriteString(fmt.Sprintf("%s\n", err))
+			append(errors, err)
 		}
-		context.SetOutput("error", buffer.String())
+		context.SetOutput("error", errors)
 	}
 	context.SetOutput("valid", result.Valid())
 	return true, nil

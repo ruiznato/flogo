@@ -1,6 +1,6 @@
 {
     "name": "jsonvalidator",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "type": "flogo:activity",
     "title": "Validate JSON",
     "ref": "github.com/ruiznato/flogo/activity/jsonvalidator",
@@ -24,7 +24,7 @@
       },
       {
         "name": "error",
-        "type": "string"
+        "type": "array"
       }
     ]
   }
