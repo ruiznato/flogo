@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"reflect"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
@@ -35,19 +34,15 @@ func (a *JSONValidatorActivity) Eval(context activity.Context) (done bool, err e
 	docString, _ := json.Marshal(jsonDoc)
 	schemaString, _ := json.Marshal(jsonSchema)
 
-	log.Infof("DOC: %v", reflect.TypeOf(jsonDoc))
-	log.Infof("SCHEMA: %v", reflect.TypeOf(jsonSchema))
 	doc := gojsonschema.NewStringLoader(fmt.Sprintf("%s", docString))
 	schema := gojsonschema.NewStringLoader(fmt.Sprintf("%s", schemaString))
 
-	log.Info("Loaded doc and schema")
 	result, err := gojsonschema.Validate(schema, doc)
 	if err != nil {
-		log.Infof("ERROR: %v", err)
+		log.Errorf("ERROR: %v", err)
 		return false, err
 	}
 
-	log.Infof("Doc validated: %v", result.Valid())
 	if !result.Valid() {
 		var buffer bytes.Buffer
 
